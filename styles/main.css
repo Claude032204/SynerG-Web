@@ -1,0 +1,222 @@
+/* ===== Header ===== */
+/* ===== Glass Header ===== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+
+  /* Glass effect */
+  background: rgba(255, 255, 255, 0.65);   /* transparency */
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+
+  /* Subtle depth */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+
+  padding: 6px 22px;
+}
+
+
+
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  
+  /* Logo */
+  .logo img {
+    height: 55px;
+    width: auto;
+    display: block;
+  }
+  
+  /* Desktop Navigation */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 40px;   /* ⬅ more breathing room */
+  }
+  .nav-menu a {
+    padding: 8px 4px;
+  }
+  
+  
+  .nav-menu a {
+    color: #000;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  
+  .nav-menu a:hover {
+    color: #536341;
+  }
+  
+  /* Hamburger Button */
+  .menu-btn {
+    display: none;
+    background: transparent;
+    border: 0;
+    color: #000;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+  /* Close button hidden on desktop */
+  .drawer-close {
+    display: none;
+  }
+  
+  /* ===== Arrow Animation ===== */
+  @keyframes arrow-slide {
+    0%   { transform: translateX(0); }
+    40%  { transform: translateX(6px); }
+    70%  { transform: translateX(-3px); }
+    100% { transform: translateX(0); }
+  }
+
+ 
+/* ✅ FIX CLIPPING — MOBILE ONLY (does NOT affect desktop) */
+@media (max-width: 768px) {
+
+  /* ✅ give space on both sides so the peeking cards aren't cut */
+  .first-page .l-realise-slider-card-block{
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  /* ✅ allow side cards to show */
+  .first-page .card-block-wrap{
+    overflow: visible !important;   /* IMPORTANT */
+    width: 100% !important;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  /* ✅ keep cards within that safe area */
+  .first-page .card{
+    max-width: 100%;
+  }
+
+  /* OPTIONAL: bring side cards slightly closer so they fit better */
+  .first-page .m-left{
+    transform: translate(-50%, -50%) translateX(-70%) scale(0.78);
+  }
+  .first-page .m-right{
+    transform: translate(-50%, -50%) translateX(70%) scale(0.78);
+  }
+
+  
+
+  .hero-text {
+    text-align: left;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 260px;
+    background: rgba(0, 0, 0, 0.70);
+    backdrop-filter: blur(30px);
+    padding: 90px 20px;
+    flex-direction: column;
+    gap: 18px;
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
+    z-index: 9999;
+  }
+
+  .nav-menu.open { transform: translateX(0); }
+
+  .nav-menu a {
+    color: #fff;
+    font-size: 18px;
+  }
+
+  .drawer-close {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 16px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 26px;
+    cursor: pointer;
+    animation: arrow-slide 1.6s infinite;
+  }
+
+  /* ✅ MOBILE: show 3 cards (center + faded sides) */
+.hero-wrapper{
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+  width: 100%;
+}
+
+.l-realise-slider-card-block{
+  margin-top: 18px;
+  width: 100%;
+}
+
+/* IMPORTANT: override the “horizontal scroll row” version */
+.card-block-wrap{
+  width: 100%;
+  height: 240px;
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+/* override card sizing for mobile */
+.card{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 320px;
+  height: 170px;
+  border-radius: 9999px;
+  transition: transform 0.6s ease, opacity 0.6s ease, filter 0.6s ease;
+}
+
+/* ✅ Mobile positions */
+.m-center{
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  filter: none;
+  z-index: 3;
+}
+
+.m-left{
+  transform: translate(-50%, -50%) translateX(-78%) scale(0.78);
+  opacity: 0.45;
+  filter: blur(0.2px);
+  z-index: 2;
+}
+
+.m-right{
+  transform: translate(-50%, -50%) translateX(78%) scale(0.78);
+  opacity: 0.45;
+  filter: blur(0.2px);
+  z-index: 2;
+}
+
+/* disable desktop stack transforms on mobile */
+.pos-top, .pos-mid, .pos-bot{
+  transform: none !important;
+}
+}

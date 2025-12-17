@@ -11,79 +11,12 @@ body {
   font-family: 'DM Sans', sans-serif;
   min-height: 100vh;
   background: #fff;
+  padding-top: 72px;
 }
 
-
-/* ===== Header ===== */
-.site-header {
-  background: #fff;
-  padding: 5px 22px;
-  border-bottom: 1px solid #e0e0e0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-/* Logo */
-.logo img {
-  height: 55px;
-  width: auto;
-  display: block;
-}
-
-/* Desktop Navigation */
-.nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 40px;   /* ⬅ more breathing room */
-}
-.nav-menu a {
-  padding: 8px 4px;
-}
-
-
-.nav-menu a {
-  color: #000;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.nav-menu a:hover {
-  color: #536341;
-}
-
-/* Hamburger Button */
-.menu-btn {
-  display: none;
-  background: transparent;
-  border: 0;
-  color: #000;
-  font-size: 28px;
-  cursor: pointer;
-}
-
-/* Close button hidden on desktop */
-.drawer-close {
-  display: none;
-}
-
-/* ===== Arrow Animation ===== */
-@keyframes arrow-slide {
-  0%   { transform: translateX(0); }
-  40%  { transform: translateX(6px); }
-  70%  { transform: translateX(-3px); }
-  100% { transform: translateX(0); }
+html, body {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 /* ===== FIRST PAGE BACKGROUND (BLUR + GREEN TINT) ===== */
@@ -164,7 +97,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(17, 30, 13, 0.9);
+  background: rgba(12, 20, 9, 0.8);
   z-index: 1;
 }
 
@@ -202,180 +135,164 @@ body {
   margin: 0 auto;
 }
 
-/* ✅ MOBILE ONLY */
-@media (max-width: 768px) {
-  .hero-layout {
-    justify-content: flex-start;
-    margin-left: 24px;   /* ✅ comfortable mobile margin */
-    margin-right: 16px;
-  }
+/* FULL-WIDTH BLACK TITLE — FIXED CENTERING + REDUCED HEIGHT */
+.about-stats__title {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+
+  background: rgba(0, 0, 0, 0.75); /* stronger contrast */
   
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  .hero-text {
-    text-align: left;
-  }
+  height: 80px;
+  margin-top: -120px;   /* ⬅ pulls the title UP */
+  margin-bottom: 60px; /* ⬅ space before paragraph */
 
-  .menu-btn {
-    display: block;
-  }
-
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: 260px;
-    background: rgba(0, 0, 0, 0.30);
-    backdrop-filter: blur(18px);
-    padding: 90px 20px;
-    flex-direction: column;
-    gap: 18px;
-    transform: translateX(100%);
-    transition: transform 0.35s ease;
-    z-index: 9999;
-  }
-
-  .nav-menu.open { transform: translateX(0); }
-
-  .nav-menu a {
-    color: #fff;
-    font-size: 18px;
-  }
-
-  .drawer-close {
-    display: block;
-    position: absolute;
-    top: 20px;
-    left: 16px;
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 26px;
-    cursor: pointer;
-    animation: arrow-slide 1.6s infinite;
-  }
+  position: relative;
+  z-index: 2;
 }
 
-/* ===== FIGMA ABOUT SECTION (MATCH SCREENSHOT) ===== */
-.about-figma{
+
+/* Title text */
+.about-stats__title h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #ffffff;
+}
+.about-stats__container {
+  padding-top: 40px;
+}
+
+
+/* ===== SECTION 2: ABOUT + STATS ===== */
+.about-stats {
   width: 100%;
-  padding: 0;          /* ✅ remove side padding */
-  margin: 0;           /* ✅ remove margins */
+  color: #fff;
+  padding: 120px 0 140px; 
+
+  /* 🔥 background image */
+  background-image: url("../pictures/Bldg.jpg"); /* adjust path if needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: relative;
+}
+.about-stats::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.50); /* 👈 LOW opacity black */
+  z-index: 0;
 }
 
 
-.about-inner {
+.about-stats__container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 40px 22px 0;
-}
-
-
-.about-panel{
-  width: 100%;
-  margin: 0;           /* ✅ no auto-centering gap */
-  border-radius: 0;    /* optional: remove rounded outer corners */
-}
-
-
-/* Top title strip look */
-.about-title{
-  padding: 18px 18px 12px;
-  font-size: 20px;
+  padding: 40px 22px 70px;
   text-align: center;
+}
+
+.about-stats__container h2 {
+  font-size: clamp(24px, 3vw, 40px);
   font-weight: 700;
-  background: rgba(255,255,255,0.06);
-}
-
-/* Paragraph */
-.about-desc{
-  max-width: 780px;
-  text-align: center;
-  margin: 18px auto 0;
-  padding: 0 22px;
-  font-size: 12.5px;
-  line-height: 1.6;
-  opacity: 0.9;
-}
-
-/* Stats row */
-.about-stats{
-  margin: 26px 0 30px;
-  display: flex;
-  justify-content: center;
-  gap: 110px;                  /* big spacing like screenshot */
-  flex-wrap: wrap;
-  padding: 0 22px;
-}
-
-.stat-card{
-  width: 170px;
-  background: #fff;
-  color: #111;
-  border-radius: 12px;
-  padding: 18px 14px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.28);
-}
-
-.stat-num{
-  font-size: 22px;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 6px;
-}
-
-.stat-label{
-  font-size: 18px;
-  text-align: center;  
-  font-weight: 800;
-  color: #5A6A45;              /* olive green text */
-  line-height: 1.15;
-}
-
-/* Green banner (big curve on right) */
-.about-banner{
-  width: 100vw;                /* ✅ true edge-to-edge */
-  margin-left: calc(50% - 50vw); /* ✅ breaks out of any container */
-  margin-right: calc(50% - 50vw);
-
-  background: #5A6A45;
-  padding: 60px 22px;
-
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 400px;
-  border-bottom-right-radius: 400px;
+  margin-bottom: 18px;
 }
 
 
-.banner-title{
-  font-size: 40px;
-  line-height: 1.05;
-  font-weight: 900;
-  margin-bottom: 14px;
-}
-
-.banner-dark{ color: #0e0e0e; }  /* “Your Career” darker */
-.banner-light{ color: #ffffff; }
-
-.banner-sub{
-  margin: 0;
-  font-size: 13px;
+.about-stats p {
+  max-width: 860px;
+  margin: 0 auto 40px;
+  font-size: 15px;
+  line-height: 1.7;
   opacity: 0.95;
 }
 
-/* Responsive */
-@media (max-width: 900px){
-  .about-stats{ gap: 24px; }
-  .banner-title{ font-size: 32px; }
+.about-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 28px;
+  justify-items: center;
 }
 
-@media (max-width: 520px){
-  .stat-card{ width: 150px; }
-  .stat-label{ font-size: 16px; }
-  .about-banner{
-    border-top-right-radius: 180px;
-    border-bottom-right-radius: 180px;
+.stat-card {
+  width: 100%;
+  max-width: 320px;
+  background: #fff;
+  color: #000;
+  border-radius: 16px;
+  padding: 26px 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+/* ✅ Stats card hover zoom animation */
+.stat-card{
+  width: 100%;
+  max-width: 280px;        /* ⬅ was 320px */
+  background: #fff;
+  color: #000;
+  border-radius: 14px;     /* slightly tighter */
+  padding: 22px 16px;      /* ⬅ reduced padding */
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.25s ease;
+  transform: translateZ(0); /* smoother animation */
+  /* cursor: pointer; */
+}
+
+.stat-card:hover,
+.stat-card:focus-within{
+  transform: scale(1.05);
+  box-shadow: 0 22px 55px rgba(0,0,0,0.35);
+  z-index: 5;
+}
+
+/* Optional: slightly shrink on click */
+.stat-card:active{
+  transform: scale(1.03);
+}
+
+
+.stat-number {
+  font-size: 30px;        /* ⬅ was 34px */
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+/* Text */
+.stat-text {
+  font-size: 18px;        /* ⬅ was 20px */
+  font-weight: 700;
+  color: #536341;
+  line-height: 1.2;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-stats__grid {
+    grid-template-columns: 1fr;
+  }
+  .stat-card {
+    max-width: 380px;
+  }
+  /* ✅ MOBILE: center the section title */
+@media (max-width: 768px) {
+  .about-stats__title {
+    height: auto;                 /* allow text to wrap nicely */
+    padding: 16px 20px;           /* better breathing room */
+    margin-top: -120px;            /* softer pull-up on mobile */
+    text-align: center;
+  }
+
+  .about-stats__title h2 {
+    text-align: center;
+    font-size: 22px;              /* slightly smaller for mobile */
+    line-height: 1.3;
+    letter-spacing: 0.4px;
   }
 }
 
+}
