@@ -2,14 +2,22 @@ const menuBtn = document.querySelector(".menu-btn");
 const navMenu = document.querySelector(".nav-menu");
 const closeBtn = document.querySelector(".drawer-close");
 
-if (menuBtn && navMenu) {
-  menuBtn.addEventListener("click", () => {
-    navMenu.classList.add("open");
-  });
-}
+menuBtn.addEventListener("click", () => {
+  navMenu.classList.add("open");
+});
 
-if (closeBtn && navMenu) {
-  closeBtn.addEventListener("click", () => {
+closeBtn.addEventListener("click", () => {
+  navMenu.classList.remove("open");
+});
+
+// close menu when clicking a link (mobile)
+navMenu.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
     navMenu.classList.remove("open");
   });
-}
+});
+
+// close menu on ESC
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") navMenu.classList.remove("open");
+});

@@ -5,12 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Syner G Outsourcing Inc.</title>
 
+    <!-- DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS -->
     <link rel="stylesheet" href="../styles/dashboard.css" />
-    <link rel="stylesheet" href="../styles/main.css" />
+
+    <!-- ===== STACKED OVAL CARD SLIDER CSS ===== -->
+    <style>
+      /* Make hero text + slider side-by-side */
+      .hero-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 40px;
+      }
+
+      .l-realise-slider-card-block {
+        position: relative;
+        transform-style: preserve-3d;
+        perspective: 900px;
+
+        margin-top: 140px; /* ✅ moves the whole stack down */
+      }
+
+      /* Wrap with enough space for stacked layout */
+      .card-block-wrap {
+        position: relative;
+        width: 560px;
+        height: 440px;
+        transform-style: preserve-3d;
+      }
+
+      /* Cards */
+      .card {
+        position: absolute;
+        width: 460px;
+        height: 240px;
+
+        /* Oval / pill like Figma */
+        border-radius: 9999px;
+
+        overflow: hidden;
+        cursor: pointer;
+
+        transition: transform 0.6s ease, box-shadow 0.4s ease, filter 0.4s ease;
+        will-change: transform;
+
+        /* soft outline like design */
+        border: 4px solid rgb(255, 255, 255);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* ===== STACKED POSITIONS ===== */
+      .pos-top {
+        transform: translate3d(-30px, -140px, -40px) scale(0.96);
+        z-index: 1;
+        filter: brightness(0.95);
+        box-shadow: none;
+      }
+
+      .pos-mid {
+        transform: translate3d(0px, 0px, 0px) scale(1);
+        z-index: 3;
+        filter: brightness(1);
+        box-shadow: 0 20px 50px rgba(0, 34, 45, 0.5);
+      }
+
+      .pos-bot {
+        transform: translate3d(70px, 150px, -40px) scale(0.96);
+        z-index: 2;
+        filter: brightness(0.92);
+        box-shadow: none;
+      }
+
+      /* ✅ Responsive: stack slider under text */
+      @media (max-width: 992px) {
+        .hero-wrapper {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .card-block-wrap {
+          margin-top: 30px;
+          width: 100%;
+          max-width: 560px;
+        }
+
+        .card {
+          width: 420px;
+          height: 220px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .card {
+          width: 330px;
+          height: 190px;
+        }
+
+        .pos-top {
+          transform: translate3d(-10px, -120px, -40px) scale(0.96);
+        }
+        .pos-bot {
+          transform: translate3d(30px, 130px, -40px) scale(0.96);
+        }
+      }
+    </style>
+
+    <!-- Your main.js handles burger menu -->
     <script defer src="../scripts/main.js"></script>
   </head>
 
   <body>
+    <!-- ===== HEADER ===== -->
     <header class="site-header">
       <div class="header-container">
         <div class="logo">
@@ -19,9 +139,9 @@
 
         <button class="menu-btn" aria-label="Open menu">☰</button>
 
-        <nav class="nav-menu">
+        <nav class="nav-menu" aria-label="Main navigation">
           <button class="drawer-close" aria-label="Close menu">→</button>
-          <a>Home</a>
+          <a href="index.html">Home</a>
           <a href="about.html">About Us</a>
           <a href="services.html">Services</a>
           <a href="contact.html">Contact</a>
@@ -29,36 +149,165 @@
       </div>
     </header>
 
-    <!-- EMPTY BODY AREA (shows dark green background) -->
-    <main class="page-spacer"></main>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="first-page">
+      <div class="first-page-content hero-layout">
+        <div class="hero-wrapper">
+          <!-- TEXT -->
+          <div class="hero-text">
+            <h1>
+              SEAMLESS<br />
+              CONNECTIONS,<br />
+              <span>SUPERIOR RESULTS!</span>
+            </h1>
 
-    <footer class="site-footer">
-      <div class="footer-container">
-        <div class="footer-logo">
-          <img src="logo.png" alt="Syner G Outsourcing Inc. Logo" />
-        </div>
+            <p>
+              Where innovation meets reliability. We provide<br />
+              tailored BPO services that streamline operations and<br />
+              enhance customer satisfaction.
+            </p>
 
-        <div class="footer-details">
-          <p>
-            2 Lower Ground Floor, Upper, Bokawkan, Baguio, 2600 Benguet,<br />
-            Philippines
-          </p>
+            <a href="services.html" class="hero-btn">GET STARTED</a>
+          </div>
 
-          <p>
-            <a href="mailto:humanresources.synerg@gmail.com">
-              humanresources.synerg@gmail.com
-            </a>
-          </p>
+          <!-- ===== STACKED OVAL SLIDER ===== -->
+          <div class="l-realise-slider-card-block">
+            <div class="card-block-wrap">
+              <div class="card" id="first">
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200"
+                  alt="Team collaboration"
+                />
+              </div>
 
-          <p>
-            <a href="tel:+6397466527669">+63 974 665 27669</a>
-          </p>
-        </div>
+              <div class="card" id="second">
+                <img
+                  src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200"
+                  alt="Team photo"
+                />
+              </div>
 
-        <div class="footer-copy">
-          <p>© 2025 by Syner G Outsourcing Inc.</p>
+              <div class="card" id="third">
+                <img
+                  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200"
+                  alt="Office work"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </footer>
+    </section>
+
+    <section class="about-figma">
+      <div class="about-panel">
+        <div class="about-inner">
+          <h2 class="about-title">
+            Empowering Filipinos Outsourcing Opportunities
+          </h2>
+
+          <p class="about-desc">
+            At Syner G Outsourcing Inc., we believe in the power of synergy,
+            innovation, and service excellence. We are committed to building
+            lasting partnerships by delivering reliable, high-quality solutions
+            that support our clients' growth. With a people-first approach and a
+            dedication to continuous improvement, we strive to exceed
+            expectations, empower teams, and create sustainable value across
+            every interaction.
+          </p>
+
+          <div class="about-stats">
+            <div class="stat-card">
+              <div class="stat-num">17+</div>
+              <div class="stat-label">Years in the<br />Industry</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-num">5000</div>
+              <div class="stat-label">Careers<br />Transformed</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-num">12+</div>
+              <div class="stat-label">Services</div>
+            </div>
+          </div>
+
+          <div class="about-banner">
+            <h3 class="banner-title">
+              <span class="banner-dark">Your Career</span>
+              <span class="banner-light">Growth.</span><br />
+              <span class="banner-dark">Our</span>
+              <span class="banner-light">Priority.</span>
+            </h3>
+            <p class="banner-sub">
+              Explore job opportunities with Syner G<br />
+              available across various industries
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Optional next section -->
+    <section class="next-section">
+      <h2>Next Section</h2>
+      <p>This area is just to show the background is only on the first page.</p>
+    </section>
+
+    <!-- ===== STACKED SLIDER JS ===== -->
+    <script>
+      // order = [mid, top, bot]
+      let order = ["first", "second", "third"];
+      let autoRotate;
+
+      function applyPositions() {
+        const [mid, top, bot] = order;
+
+        ["first", "second", "third"].forEach((id) => {
+          const el = document.getElementById(id);
+          el.classList.remove("pos-top", "pos-mid", "pos-bot");
+        });
+
+        document.getElementById(mid).classList.add("pos-mid");
+        document.getElementById(top).classList.add("pos-top");
+        document.getElementById(bot).classList.add("pos-bot");
+      }
+
+      // rotate: top -> mid, bot -> top, mid -> bot (nice alternating cycle)
+      function nextLayout() {
+        order = [order[1], order[2], order[0]];
+        applyPositions();
+      }
+
+      function startAutoRotate() {
+        stopAutoRotate();
+        autoRotate = setInterval(nextLayout, 2500);
+      }
+
+      function stopAutoRotate() {
+        if (autoRotate) clearInterval(autoRotate);
+      }
+
+      // init
+      applyPositions();
+      startAutoRotate();
+
+      // hover brings card to front
+      ["first", "second", "third"].forEach((id) => {
+        document.getElementById(id).addEventListener("mouseenter", () => {
+          stopAutoRotate();
+
+          const others = order.filter((x) => x !== id);
+          order = [id, others[0], others[1]];
+          applyPositions();
+        });
+      });
+
+      // resume on mouse leave
+      document
+        .querySelector(".card-block-wrap")
+        .addEventListener("mouseleave", startAutoRotate);
+    </script>
   </body>
 </html>
