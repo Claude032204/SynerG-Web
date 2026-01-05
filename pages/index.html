@@ -17,9 +17,94 @@
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/dashboard.css" />
 
-    <!-- ===== STACKED OVAL CARD SLIDER CSS ===== -->
+    <!-- =========================================================
+         FIXED OVERRIDES (header + hero wrapping + title bar)
+         ========================================================= -->
     <style>
-      /* Make hero text + slider side-by-side */
+      :root {
+        --header-h: 72px;
+      }
+
+      /* Header height stays consistent even on zoom */
+      .site-header {
+        height: var(--header-h);
+        padding: 0 22px;
+        display: flex;
+        align-items: center;
+      }
+      .header-container {
+        height: 100%;
+        width: 100%;
+      }
+      body {
+        padding-top: var(--header-h);
+      }
+
+      /* Replace hard “push left” spacing with stable centered wrapper */
+      .hero-layout {
+        width: 100%;
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+      }
+
+      .hero-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      .hero-text {
+        flex: 1 1 420px;
+        max-width: 520px;
+      }
+
+      .l-realise-slider-card-block {
+        flex: 0 1 520px;
+      }
+
+      /* Remove negative margin pull-up (zoom breaks it) */
+      .about-stats {
+        position: relative;
+        padding-top: 80px;
+      }
+
+      .about-stats__title {
+        position: absolute;
+        top: -1px;
+        left: 0;
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        background: rgba(0, 0, 0, 0.75);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 80px;
+        margin-top: 0 !important;
+        margin-bottom: 60px;
+        z-index: 2;
+      }
+
+      @media (max-width: 768px) {
+        .about-stats__title {
+          height: auto;
+          padding: 16px 20px;
+          top: -1px;
+        }
+        .about-stats__title h2 {
+          text-align: center;
+          font-size: 22px;
+          line-height: 1.3;
+          letter-spacing: 0.4px;
+        }
+      }
+
+      /* STACKED OVAL CARD SLIDER (unchanged, just kept inline) */
       .hero-wrapper {
         display: flex;
         align-items: center;
@@ -32,29 +117,24 @@
         position: relative;
         transform-style: preserve-3d;
         perspective: 900px;
-
-        margin-top: 170px; /* ✅ moves the whole stack down */
+        margin-top: 170px;
       }
 
-      /* Wrap with enough space for stacked layout */
       .card-block-wrap {
-        width: 520px; /* ⬅ was 560px */
-        height: 480px; /* ⬅ was 540px */
+        width: 520px;
+        height: 480px;
       }
 
       .card {
         position: absolute;
-        width: 400px; /* ⬅ smaller width */
-        height: 210px; /* ⬅ smaller height */
-
+        width: 400px;
+        height: 210px;
         border-radius: 9999px;
         overflow: hidden;
         cursor: default;
-
         transition: transform 0.6s ease, box-shadow 0.4s ease, filter 0.4s ease,
           opacity 0.6s ease;
         will-change: transform;
-
         border: 2px solid #fff;
         background: rgba(255, 255, 255, 0.08);
       }
@@ -65,7 +145,6 @@
         object-fit: cover;
       }
 
-      /* ===== STACKED POSITIONS (DESKTOP) ===== */
       .pos-top {
         transform: translate3d(-60px, -165px, -40px) scale(0.96);
       }
@@ -78,7 +157,6 @@
         transform: translate3d(75px, 185px, -40px) scale(0.96);
       }
 
-      /* ✅ Tablet sizing */
       @media (max-width: 992px) {
         .card {
           width: 360px;
@@ -86,7 +164,6 @@
         }
       }
 
-      /* ✅ MOBILE: center + faded sides carousel */
       @media (max-width: 768px) {
         .hero-wrapper {
           flex-direction: column;
@@ -97,7 +174,7 @@
         }
 
         .l-realise-slider-card-block {
-          margin-top: 18px; /* remove big top push */
+          margin-top: 18px;
           width: 100%;
           perspective: none;
           transform-style: flat;
@@ -142,7 +219,6 @@
           z-index: 2;
         }
 
-        /* disable desktop transforms on mobile */
         .pos-top,
         .pos-mid,
         .pos-bot {
@@ -150,7 +226,6 @@
         }
       }
 
-      /* Extra small phones */
       @media (max-width: 520px) {
         .card {
           width: 300px;
@@ -165,9 +240,65 @@
           transform: translate(-50%, -50%) translateX(72%) scale(0.78);
         }
       }
+
+      /* =========================================================
+         ✅ SCROLL REVEAL ANIMATION (ADDED - won't affect other CSS)
+         ========================================================= */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 700ms ease, transform 700ms ease;
+        will-change: opacity, transform;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Optional stagger delays */
+      .reveal.delay-1 {
+        transition-delay: 120ms;
+      }
+      .reveal.delay-2 {
+        transition-delay: 240ms;
+      }
+      .reveal.delay-3 {
+        transition-delay: 360ms;
+      }
+
+      /* Respect reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          transition: none;
+          opacity: 1;
+          transform: none;
+        }
+      }
     </style>
 
-    <!-- Your main.js handles burger menu -->
+    <!-- ✅ Scroll Reveal JS (kept your logic, unchanged) -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const items = document.querySelectorAll(".reveal");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target); // reveal once
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+
+        items.forEach((el) => observer.observe(el));
+      });
+    </script>
+
+    <!-- main.js for burger menu -->
     <script defer src="../scripts/main.js"></script>
   </head>
 
@@ -196,7 +327,7 @@
       <div class="first-page-content hero-layout">
         <div class="hero-wrapper">
           <!-- TEXT -->
-          <div class="hero-text">
+          <div class="hero-text reveal">
             <h1>
               SEAMLESS<br />
               CONNECTIONS,<br />
@@ -213,7 +344,7 @@
           </div>
 
           <!-- ===== STACKED / MOBILE CAROUSEL ===== -->
-          <div class="l-realise-slider-card-block">
+          <div class="l-realise-slider-card-block reveal delay-1">
             <div class="card-block-wrap">
               <div class="card" id="first">
                 <img
@@ -241,13 +372,13 @@
       </div>
     </section>
 
-    <!-- ===== SECTION 2: ABOUT + STATS (Figma-like) ===== -->
+    <!-- ===== SECTION 2: ABOUT + STATS ===== -->
     <section class="about-stats">
-      <div class="about-stats__title">
+      <div class="about-stats__title reveal">
         <h2>Empowering Filipinos Outsourcing Opportunities</h2>
       </div>
 
-      <div class="about-stats__container">
+      <div class="about-stats__container reveal delay-1">
         <p>
           At <strong>Syner G Outsourcing Inc.</strong>, we believe in the power
           of synergy, innovation, and service excellence. We are committed to
@@ -259,17 +390,17 @@
         </p>
 
         <div class="about-stats__grid">
-          <div class="stat-card">
+          <div class="stat-card reveal delay-1">
             <div class="stat-number">17+</div>
             <div class="stat-text">Years in the<br />Industry</div>
           </div>
 
-          <div class="stat-card">
+          <div class="stat-card reveal delay-2">
             <div class="stat-number">5000</div>
             <div class="stat-text">Careers<br />Transformed</div>
           </div>
 
-          <div class="stat-card">
+          <div class="stat-card reveal delay-3">
             <div class="stat-number">12+</div>
             <div class="stat-text">Services</div>
           </div>
@@ -277,9 +408,91 @@
       </div>
     </section>
 
+    <!-- ===== SECTION 3: GREEN OVAL CONTENT ===== -->
+    <section class="dashboard-oval">
+      <div class="dashboard-oval__inner">
+        <div class="dashboard-oval__content">
+          <!-- LEFT: TEXT -->
+          <div class="dashboard-oval__left reveal delay-1">
+            <h2 class="oval-title">
+              Your Career <span>Growth.</span><br />
+              Our <span>Priority.</span>
+            </h2>
+
+            <p class="oval-desc">
+              Explore job opportunities with Syner G<br />
+              available across various industries.
+            </p>
+
+            <p class="oval-sub">Land your Dream Job.</p>
+
+            <a href="services.html" class="oval-btn">Learn More</a>
+          </div>
+
+          <!-- RIGHT: VENN -->
+          <div class="dashboard-oval__right reveal delay-2">
+            <div class="venn">
+              <div class="venn-circle c1">
+                <span>IT<br />Solutions</span>
+              </div>
+
+              <div class="venn-circle c2">
+                <span>Call<br />Handling<br />Solutions</span>
+              </div>
+
+              <div class="venn-circle c3">
+                <span>Non-Voice<br />Account</span>
+              </div>
+
+              <!-- center logo circle -->
+              <div class="venn-center">
+                <img src="logo.png" alt="Syner G" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 4: BG IMAGE + CENTER CTA ===== -->
+    <section class="cta-bg reveal">
+      <div class="cta-bg__content">
+        <h2>We’d love to hear from you at <span>Syner G!</span></h2>
+        <a href="contact.html" class="cta-bg__btn">Talk to Us!</a>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer reveal">
+      <div class="footer-inner">
+        <!-- Logo -->
+        <div class="footer-logo">
+          <img src="logo.png" alt="Syner G Outsourcing Inc." />
+        </div>
+
+        <!-- Address -->
+        <p class="footer-address">
+          2 Lower Ground Floor, Upper, Bokawkan, Baguio, 2600 Benguet,<br />
+          Philippines
+        </p>
+
+        <!-- Contact -->
+        <p class="footer-contact">
+          <a href="mailto:humanresources.synerg@gmail.com">
+            humanresources.synerg@gmail.com
+          </a>
+          <br />
+          <a href="tel:+6397466527669">+63 974 665 27669</a>
+        </p>
+
+        <!-- Copyright -->
+        <p class="footer-copy">© 2025 by Syner G Outsourcing Inc.</p>
+      </div>
+    </footer>
+
     <!-- ===== SLIDER JS: Desktop stacked + Mobile center/faded carousel ===== -->
     <script>
-      let order = ["first", "second", "third"]; // desktop uses [mid, top, bot] / mobile uses [center, left, right]
+      let order = ["first", "second", "third"];
       let timer;
 
       function isMobile() {
@@ -290,7 +503,6 @@
         if (timer) clearInterval(timer);
       }
 
-      // ===== DESKTOP (stacked) =====
       function applyDesktopPositions() {
         const [mid, top, bot] = order;
 
@@ -315,17 +527,12 @@
         timer = setInterval(nextDesktop, 2500);
       }
 
-      // ===== MOBILE (center + faded sides) =====
       function applyMobilePositions() {
         const [center, left, right] = order;
 
         ["first", "second", "third"].forEach((id) => {
           const el = document.getElementById(id);
-
-          // ✅ remove desktop classes
           el.classList.remove("pos-top", "pos-mid", "pos-bot");
-
-          // ✅ remove mobile classes
           el.classList.remove("m-center", "m-left", "m-right");
         });
 
@@ -335,7 +542,6 @@
       }
 
       function nextMobile() {
-        // center becomes right, right becomes left, left becomes center
         order = [order[2], order[0], order[1]];
         applyMobilePositions();
       }
@@ -351,9 +557,41 @@
         else startDesktop();
       }
 
-      // Init + swap modes on resize
       startCorrectMode();
       window.addEventListener("resize", startCorrectMode);
+    </script>
+
+    <!-- ===== VENN ROTATION JS (every 2 seconds) ===== -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const circles = [
+          document.querySelector(".c1"),
+          document.querySelector(".c2"),
+          document.querySelector(".c3"),
+        ];
+
+        const positionClasses = ["position-1", "position-2", "position-3"];
+        let offset = 0;
+
+        function applyVennPositions() {
+          circles.forEach((circle) => {
+            positionClasses.forEach((cls) => circle.classList.remove(cls));
+          });
+
+          circles.forEach((circle, index) => {
+            const cls = positionClasses[(index + offset) % 3];
+            circle.classList.add(cls);
+          });
+        }
+
+        function rotateVenn() {
+          offset = (offset + 1) % 3;
+          applyVennPositions();
+        }
+
+        applyVennPositions();
+        setInterval(rotateVenn, 2000);
+      });
     </script>
   </body>
 </html>
