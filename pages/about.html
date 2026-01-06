@@ -3,12 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Syner G Outsourcing Inc.</title>
-    <link rel="stylesheet" href="../styles/dashboard.css" />
+    <title>About Us - Syner G Outsourcing Inc.</title>
+
     <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/about.css" />
     <script defer src="../scripts/main.js"></script>
   </head>
+
   <body>
+    <!-- ===== HEADER ===== -->
     <header class="site-header">
       <div class="header-container">
         <div class="logo">
@@ -17,15 +20,95 @@
 
         <button class="menu-btn" aria-label="Open menu">☰</button>
 
-        <nav class="nav-menu">
+        <nav class="nav-menu" aria-label="Main navigation">
           <button class="drawer-close" aria-label="Close menu">→</button>
-
           <a href="index.html">Home</a>
-          <a>About Us</a>
+          <a href="about.html">About Us</a>
           <a href="services.html">Services</a>
           <a href="contact.html">Contact</a>
         </nav>
       </div>
     </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section">
+      <!-- Video Background -->
+      <div class="video-background">
+        <video autoplay muted loop playsinline>
+          <source src="../pictures/bg_about_us.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+      </div>
+
+      <div class="hero-container">
+        <!-- LEFT CONTENT -->
+        <div class="hero-content">
+          <h1 class="hero-title">
+            We are <span class="highlight">Syner G</span><br />
+            Outsourcing Inc.
+          </h1>
+
+          <div class="hero-divider"></div>
+
+          <p class="hero-description">
+            Syner G Outsourcing Inc. is a trusted Business Process Outsourcing
+            (BPO) provider with 17 years of experience delivering high-quality,
+            cost-effective, and scalable solutions to clients across diverse
+            industries. We specialize in both voice and non-voice services,
+            helping businesses streamline operations, improve customer
+            engagement, and achieve greater operational efficiency.
+          </p>
+        </div>
+
+        <!-- RIGHT: OVERLAP CARDS (LIKE YOUR FIGMA) -->
+        <div class="hero-images" aria-label="About page carousel">
+          <div class="overlap-carousel">
+            <div class="oc-item" data-pos="left">
+              <img src="../pictures/event.jpg" alt="Business conference" />
+            </div>
+
+            <div class="oc-item" data-pos="center">
+              <img src="../pictures/synergbg.JPG" alt="Business meeting" />
+            </div>
+
+            <div class="oc-item" data-pos="right">
+              <img src="../pictures/Bldg.jpg" alt="Company building" />
+            </div>
+          </div>
+        </div>
+
+        <!-- CENTER BOTTOM LOGO -->
+        <div class="hero-logo">
+          <img src="logo.png" alt="Syner G Logo" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ✅ Carousel switching logic (every 3 seconds) -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const items = Array.from(document.querySelectorAll(".oc-item"));
+        if (items.length !== 3) return;
+
+        // positions in order: [left, center, right]
+        let order = ["left", "center", "right"];
+
+        function applyPositions() {
+          items.forEach((el, index) => {
+            el.setAttribute("data-pos", order[index]);
+          });
+        }
+
+        // Initial
+        applyPositions();
+
+        // Every 3 seconds: left -> center, center -> right, right -> left
+        setInterval(() => {
+          order = [order[2], order[0], order[1]];
+          applyPositions();
+        }, 3000);
+      });
+    </script>
   </body>
 </html>
