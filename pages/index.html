@@ -13,241 +13,16 @@
       rel="stylesheet"
     />
 
-    <!-- Main CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/dashboard.css" />
 
-    <!-- =========================================================
-         FIXED OVERRIDES (header + hero wrapping + title bar)
-         ========================================================= -->
-    <style>
-      :root {
-        --header-h: 72px;
-      }
-
-      /* Header height stays consistent even on zoom */
-      .site-header {
-        height: var(--header-h);
-        padding: 0 22px;
-        display: flex;
-        align-items: center;
-      }
-      .header-container {
-        height: 100%;
-        width: 100%;
-      }
-      body {
-        padding-top: var(--header-h);
-      }
-
-      /* Replace hard “push left” spacing with stable centered wrapper */
-      .hero-layout {
-        width: 100%;
-        padding-left: 0 !important;
-        margin-left: 0 !important;
-      }
-
-      .hero-wrapper {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 22px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 40px;
-        flex-wrap: wrap;
-        width: 100%;
-      }
-
-      .hero-text {
-        flex: 1 1 420px;
-        max-width: 520px;
-      }
-
-      .l-realise-slider-card-block {
-        flex: 0 1 520px;
-      }
-
-      /* Remove negative margin pull-up (zoom breaks it) */
-      .about-stats {
-        position: relative;
-        padding-top: 80px;
-      }
-
-      .about-stats__title {
-        position: absolute;
-        top: -1px;
-        left: 0;
-        width: 100vw;
-        margin-left: calc(50% - 50vw);
-        background: rgba(0, 0, 0, 0.75);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 80px;
-        margin-top: 0 !important;
-        margin-bottom: 60px;
-        z-index: 2;
-      }
-
-      @media (max-width: 768px) {
-        .about-stats__title {
-          height: auto;
-          padding: 16px 20px;
-          top: -1px;
-        }
-        .about-stats__title h2 {
-          text-align: center;
-          font-size: 22px;
-          line-height: 1.3;
-          letter-spacing: 0.4px;
-        }
-      }
-
-      /* STACKED OVAL CARD SLIDER (unchanged, just kept inline) */
-      .hero-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        gap: 40px;
-      }
-
-      .l-realise-slider-card-block {
-        position: relative;
-        transform-style: preserve-3d;
-        perspective: 900px;
-        margin-top: 170px;
-      }
-
-      .card-block-wrap {
-        width: 520px;
-        height: 480px;
-      }
-
-      .card {
-        position: absolute;
-        width: 400px;
-        height: 210px;
-        border-radius: 9999px;
-        overflow: hidden;
-        cursor: default;
-        transition: transform 0.6s ease, box-shadow 0.4s ease, filter 0.4s ease,
-          opacity 0.6s ease;
-        will-change: transform;
-        border: 2px solid #fff;
-        background: rgba(255, 255, 255, 0.08);
-      }
-
-      .card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .pos-top {
-        transform: translate3d(-60px, -165px, -40px) scale(0.96);
-      }
-
-      .pos-mid {
-        transform: translate3d(0px, 0px, 0px) scale(1);
-      }
-
-      .pos-bot {
-        transform: translate3d(75px, 185px, -40px) scale(0.96);
-      }
-
-      @media (max-width: 992px) {
-        .card {
-          width: 360px;
-          height: 190px;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .hero-wrapper {
-          flex-direction: column;
-          align-items: flex-start;
-          justify-content: flex-start;
-          gap: 22px;
-          width: 100%;
-        }
-
-        .l-realise-slider-card-block {
-          margin-top: 18px;
-          width: 100%;
-          perspective: none;
-          transform-style: flat;
-        }
-
-        .card-block-wrap {
-          width: 100%;
-          height: 240px;
-          position: relative;
-          overflow: hidden;
-          display: block;
-        }
-
-        .card {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 320px;
-          height: 170px;
-          border-radius: 9999px;
-          border: 2px solid #fff;
-        }
-
-        .m-center {
-          transform: translate(-50%, -50%) scale(1);
-          opacity: 1;
-          filter: none;
-          z-index: 3;
-        }
-
-        .m-left {
-          transform: translate(-50%, -50%) translateX(-78%) scale(0.78);
-          opacity: 0.45;
-          filter: blur(0.2px);
-          z-index: 2;
-        }
-
-        .m-right {
-          transform: translate(-50%, -50%) translateX(78%) scale(0.78);
-          opacity: 0.45;
-          filter: blur(0.2px);
-          z-index: 2;
-        }
-
-        .pos-top,
-        .pos-mid,
-        .pos-bot {
-          transform: none !important;
-        }
-      }
-
-      @media (max-width: 520px) {
-        .card {
-          width: 300px;
-          height: 165px;
-        }
-
-        .m-left {
-          transform: translate(-50%, -50%) translateX(-72%) scale(0.78);
-        }
-
-        .m-right {
-          transform: translate(-50%, -50%) translateX(72%) scale(0.78);
-        }
-      }
-    </style>
-
-    <!-- main.js for burger menu -->
+    <!-- Burger menu JS -->
     <script defer src="../scripts/main.js"></script>
   </head>
 
   <body>
-    <!-- ===== HEADER ===== -->
+    <!-- ===== HEADER (COPY THIS EXACT HEADER TO ALL PAGES) ===== -->
     <header class="site-header">
       <div class="header-container">
         <div class="logo">
@@ -258,7 +33,7 @@
 
         <nav class="nav-menu" aria-label="Main navigation">
           <button class="drawer-close" aria-label="Close menu">→</button>
-          <a href="index.html">Home</a>
+          <a href="index.html" class="active">Home</a>
           <a href="about.html">About Us</a>
           <a href="services.html">Services</a>
           <a href="contact.html">Contact</a>
@@ -356,7 +131,7 @@
     <section class="dashboard-oval">
       <div class="dashboard-oval__inner">
         <div class="dashboard-oval__content">
-          <!-- LEFT: TEXT -->
+          <!-- LEFT -->
           <div class="dashboard-oval__left">
             <h2 class="oval-title">
               Your Career <span>Growth.</span><br />
@@ -388,7 +163,6 @@
                 <span>Non-Voice<br />Account</span>
               </div>
 
-              <!-- center logo circle -->
               <div class="venn-center">
                 <img src="logo.png" alt="Syner G" />
               </div>
@@ -409,18 +183,15 @@
     <!-- ===== FOOTER ===== -->
     <footer class="site-footer">
       <div class="footer-inner">
-        <!-- Logo -->
         <div class="footer-logo">
           <img src="logo.png" alt="Syner G Outsourcing Inc." />
         </div>
 
-        <!-- Address -->
         <p class="footer-address">
           2 Lower Ground Floor, Upper, Bokawkan, Baguio, 2600 Benguet,<br />
           Philippines
         </p>
 
-        <!-- Contact -->
         <p class="footer-contact">
           <a href="mailto:humanresources.synerg@gmail.com">
             humanresources.synerg@gmail.com
@@ -429,12 +200,11 @@
           <a href="tel:+6397466527669">+63 974 665 27669</a>
         </p>
 
-        <!-- Copyright -->
         <p class="footer-copy">© 2025 by Syner G Outsourcing Inc.</p>
       </div>
     </footer>
 
-    <!-- ===== SLIDER JS: Desktop stacked + Mobile center/faded carousel ===== -->
+    <!-- ===== SLIDER JS ===== -->
     <script>
       let order = ["first", "second", "third"];
       let timer;
@@ -505,7 +275,7 @@
       window.addEventListener("resize", startCorrectMode);
     </script>
 
-    <!-- ===== VENN ROTATION JS (every 2 seconds) ===== -->
+    <!-- ===== VENN ROTATION JS ===== -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const circles = [
