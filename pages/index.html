@@ -93,7 +93,7 @@
 
     <!-- ===== SECTION 2: ABOUT + STATS ===== -->
     <section class="about-stats">
-      <div class="about-stats__title">
+      <div class="about-stats__title reveal-right">
         <h2>Empowering Filipinos Outsourcing Opportunities</h2>
       </div>
 
@@ -132,7 +132,7 @@
       <div class="dashboard-oval__inner">
         <div class="dashboard-oval__content">
           <!-- LEFT -->
-          <div class="dashboard-oval__left">
+          <div class="dashboard-oval__left oval-left-reveal">
             <h2 class="oval-title">
               Your Career <span>Growth.</span><br />
               Our <span>Priority.</span>
@@ -149,7 +149,7 @@
           </div>
 
           <!-- RIGHT: VENN -->
-          <div class="dashboard-oval__right">
+          <div class="dashboard-oval__right oval-right-reveal">
             <div class="venn">
               <div class="venn-circle c1">
                 <span>IT<br />Solutions</span>
@@ -175,7 +175,10 @@
     <!-- ===== SECTION 4: BG IMAGE + CENTER CTA ===== -->
     <section class="cta-bg">
       <div class="cta-bg__content">
-        <h2>We’d love to hear from you at <span>Syner G!</span></h2>
+        <h2 class="cta-typing">
+          We’d love to hear from you at <span>Syner G!</span>
+        </h2>
+
         <a href="contact.html" class="cta-bg__btn">Talk to Us!</a>
       </div>
     </section>
@@ -305,6 +308,128 @@
 
         applyVennPositions();
         setInterval(rotateVenn, 2000);
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const aboutStats = document.querySelector(".about-stats");
+        if (!aboutStats) return;
+
+        const reveals = aboutStats.querySelectorAll(".reveal-right");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target); // animate once
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+
+        reveals.forEach((el) => observer.observe(el));
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const aboutStats = document.querySelector(".about-stats");
+        if (!aboutStats) return;
+
+        // Title reveal (only if it still has reveal-right)
+        const title = aboutStats.querySelector(
+          ".about-stats__title.reveal-right"
+        );
+        const cards = aboutStats.querySelectorAll(".stat-card");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+
+              // Title
+              if (entry.target.classList.contains("reveal-right")) {
+                entry.target.classList.add("is-visible");
+              }
+
+              // Grid trigger -> reveal all cards
+              if (entry.target.classList.contains("about-stats__grid")) {
+                cards.forEach((card) => card.classList.add("is-visible"));
+              }
+
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        if (title) observer.observe(title);
+
+        const grid = aboutStats.querySelector(".about-stats__grid");
+        if (grid) observer.observe(grid);
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const ovalSection = document.querySelector(".dashboard-oval");
+        if (!ovalSection) return;
+
+        const left = ovalSection.querySelector(".oval-left-reveal");
+        const right = ovalSection.querySelector(".oval-right-reveal");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+
+              // slide both at the same time
+              if (left) left.classList.add("is-visible");
+              if (right) right.classList.add("is-visible");
+
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.25 }
+        );
+
+        observer.observe(ovalSection);
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const ctaSection = document.querySelector(".cta-bg");
+        const typingEl = document.querySelector(".cta-typing");
+        if (!ctaSection || !typingEl) return;
+
+        const fullHTML = typingEl.innerHTML;
+        let index = 0;
+        let hasPlayed = false;
+
+        typingEl.innerHTML = "";
+
+        function typeText() {
+          if (index <= fullHTML.length) {
+            typingEl.innerHTML = fullHTML.slice(0, index);
+            index++;
+            setTimeout(typeText, 35); // typing speed (lower = faster)
+          }
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && !hasPlayed) {
+                hasPlayed = true;
+                typeText();
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.4 }
+        );
+
+        observer.observe(ctaSection);
       });
     </script>
   </body>

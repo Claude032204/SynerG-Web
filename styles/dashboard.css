@@ -239,6 +239,61 @@
   color: #536341;
   line-height: 1.25;
 }
+/* =========================================
+   SCROLL REVEAL (ONLY ABOUT-STATS)
+   ========================================= */
+   .about-stats .reveal-right{
+    opacity: 0;
+    transform: translateX(80px);
+    transition: transform 0.9s ease, opacity 0.9s ease;
+    will-change: transform, opacity;
+  }
+  
+  .about-stats .reveal-right.is-visible{
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* optional stagger: container after title */
+  .about-stats .about-stats__container.reveal-right{
+    transition-delay: 0.15s;
+  }
+  
+  @media (max-width: 768px){
+    .about-stats .reveal-right{
+      transform: translateX(45px);
+      transition: transform 0.75s ease, opacity 0.75s ease;
+    }
+  }
+/* =========================================
+   STATS CARDS REVEAL (slide up)
+   ========================================= */
+   .about-stats .stat-card{
+    opacity: 0;
+    transform: translateY(40px);
+    transition: transform 0.75s ease, opacity 0.75s ease;
+    will-change: transform, opacity;
+  }
+  
+  .about-stats .stat-card.is-visible{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* stagger animation */
+  .about-stats .stat-card:nth-child(1){ transition-delay: 0.00s; }
+  .about-stats .stat-card:nth-child(2){ transition-delay: 0.12s; }
+  .about-stats .stat-card:nth-child(3){ transition-delay: 0.24s; }
+  
+  @media (prefers-reduced-motion: reduce){
+    .about-stats .stat-card{
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+    
+  
 
 /* =========================================================
    SECTION 3: OVAL + VENN
@@ -406,7 +461,43 @@
   width: 46px;
   height: auto;
   display: block;
+}/* =========================================
+   DASHBOARD OVAL REVEAL (LEFT + RIGHT)
+   ========================================= */
+.dashboard-oval .oval-left-reveal,
+.dashboard-oval .oval-right-reveal{
+  opacity: 0;
+  transition: transform 0.9s ease, opacity 0.9s ease;
+  will-change: transform, opacity;
 }
+
+/* start positions */
+.dashboard-oval .oval-left-reveal{
+  transform: translateX(-70px);
+}
+
+.dashboard-oval .oval-right-reveal{
+  transform: translateX(70px);
+}
+
+/* visible state */
+.dashboard-oval .oval-left-reveal.is-visible,
+.dashboard-oval .oval-right-reveal.is-visible{
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .dashboard-oval .oval-left-reveal,
+  .dashboard-oval .oval-right-reveal{
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
 
 /* =========================================================
    SECTION 4: BG IMAGE + CENTER CTA
@@ -484,59 +575,21 @@
   transform: translateY(-1px);
   opacity: 0.98;
 }
+/* =========================================
+   CTA TYPING TEXT
+   ========================================= */
+   .cta-typing{
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  @media (max-width: 768px){
+    .cta-typing{
+      white-space: normal; /* allow wrap on mobile */
+    }
+  }
+  
 
-/* =========================================================
-   FOOTER
-   ========================================================= */
-.site-footer{
-  width: 100%;
-  background: #1a1a1a;
-  color: #ffffff;
-  padding: 30px 22px 30px;
-  text-align: center;
-}
-
-.footer-inner{
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 22px;
-}
-
-.footer-logo img{
-  width: 56px;
-  height: auto;
-  display: block;
-}
-
-.footer-address{
-  font-size: 14.5px;
-  line-height: 1.6;
-  opacity: 0.9;
-  margin: 0;
-}
-
-.footer-contact{
-  font-size: 14.5px;
-  line-height: 1.8;
-  margin: 0;
-}
-
-.footer-contact a{
-  color: #ffffff;
-  text-decoration: underline;
-  opacity: 0.95;
-}
-
-.footer-contact a:hover{ opacity: 0.7; }
-
-.footer-copy{
-  margin-top: 24px;
-  font-size: 13px;
-  opacity: 0.6;
-}
 
 /* =========================================================
    RESPONSIVE

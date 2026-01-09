@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Syner G Outsourcing Inc.</title>
-    <link rel="stylesheet" href="../styles/dashboard.css" />
+    <link rel="stylesheet" href="../styles/services.css" />
     <link rel="stylesheet" href="../styles/main.css" />
     <script defer src="../scripts/main.js"></script>
   </head>
@@ -27,5 +27,161 @@
         </nav>
       </div>
     </header>
+
+    <main class="services-page">
+      <section class="services-hero">
+        <h2>OUR SERVICES</h2>
+
+        <div class="services-cards">
+          <!-- INBOUND -->
+          <div class="service-card svc-reveal svc-inbound">
+            <div class="icon-circle">
+              <img src="../pictures/inbnd cll.avif" alt="Inbound" />
+            </div>
+            <h3>Inbound Call<br />Center Services</h3>
+            <p>
+              We provide comprehensive end-to-end call handling services, from
+              attentive customer support and order processing to diligent
+              follow-ups, strategic lead generation, appointment setting, and
+              follow-up—all delivered with a consistent, brand-aligned
+              experience.
+            </p>
+            <a href="services-2.html" class="more-btn">MORE</a>
+          </div>
+
+          <!-- OUTBOUND -->
+          <div class="service-card svc-reveal svc-outbound">
+            <div class="icon-circle">
+              <img src="../pictures/outbndcall.avif" alt="Outbound" />
+            </div>
+            <h3>Outbound Call<br />Center Services</h3>
+
+            <div class="service-subsection">
+              <strong>Appointment Setting</strong>
+              <p>
+                We handle scheduling, confirmations, and reminders to keep your
+                operations running smoothly.
+              </p>
+            </div>
+
+            <div class="service-subsection">
+              <strong>Lead Generation</strong>
+              <p>
+                We identify and qualify high-quality leads so your sales team
+                can focus on closing deals.
+              </p>
+            </div>
+
+            <a href="services-2.html" class="more-btn">MORE</a>
+          </div>
+
+          <!-- NON-VOICE -->
+          <div class="service-card svc-reveal svc-nonvoice">
+            <div class="icon-circle">
+              <img src="../pictures/nnvoice.avif" alt="Non Voice" />
+            </div>
+            <h3>Non-Voice<br />Services</h3>
+            <p>
+              We deliver reliable and efficient non-voice support, including
+              data entry, email and live chat handling, content moderation,
+              transcription, and more—ideal for driving behind-the-scenes
+              productivity.
+            </p>
+            <a href="services-2.html" class="more-btn">MORE</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- IT SUPPORT -->
+      <section class="it-support">
+        <div class="it-card it-reveal">
+          <div class="it-image">
+            <img src="../pictures/itspprtserv.avif" alt="IT Support" />
+          </div>
+
+          <div class="it-text">
+            <h3>IT Support Services</h3>
+            <p>
+              Our IT team offers end-to-end development and support for websites
+              and mobile apps tailored to your business needs. From design and
+              development to ongoing maintenance, we ensure your digital
+              platforms are fast, secure, and user-friendly.
+            </p>
+            <a href="services-2.html" class="more-btn">MORE</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <img src="logo.png" alt="Syner G Outsourcing Inc." />
+        </div>
+
+        <p class="footer-address">
+          2 Lower Ground Floor, Upper, Bokawkan, Baguio, 2600 Benguet,<br />
+          Philippines
+        </p>
+
+        <p class="footer-contact">
+          <a href="mailto:humanresources.synerg@gmail.com">
+            humanresources.synerg@gmail.com
+          </a>
+          <br />
+          <a href="tel:+6397466527669">+63 974 665 27669</a>
+        </p>
+
+        <p class="footer-copy">© 2025 by Syner G Outsourcing Inc.</p>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const revealItems = document.querySelectorAll(".it-reveal");
+        if (!revealItems.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+
+                // animate once
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.2,
+            rootMargin: "0px 0px -60px 0px",
+          }
+        );
+
+        revealItems.forEach((item) => observer.observe(item));
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const revealItems = document.querySelectorAll(
+          ".it-reveal, .svc-reveal"
+        );
+        if (!revealItems.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target); // animate once
+              }
+            });
+          },
+          { threshold: 0.2, rootMargin: "0px 0px -60px 0px" }
+        );
+
+        revealItems.forEach((el) => observer.observe(el));
+      });
+    </script>
   </body>
 </html>
