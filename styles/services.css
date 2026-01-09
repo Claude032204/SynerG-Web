@@ -36,7 +36,7 @@
     right: 0;
     height: 460px;  /* taller so it shows behind header */
   
-    background: url("../pictures/vismis.jpg") center top / cover no-repeat;
+    background: url("../pictures/BGs/vismis.jpg") center top / cover no-repeat;
     opacity: 0.35;
     z-index: 0;
   

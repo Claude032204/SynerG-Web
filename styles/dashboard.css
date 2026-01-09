@@ -16,7 +16,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("../pictures/event.jpg");
+  background-image: url("../pictures/BGs/event.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -149,7 +149,7 @@
   padding: 180px 0 200px;
   min-height: 120vh;
 
-  background-image: url("../pictures/Bldg.jpg");
+  background-image: url("../pictures/BGs/Bldg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -509,7 +509,7 @@
   overflow: hidden;
   text-align: center;
 
-  background-image: url("../pictures/fourthbg.PNG");
+  background-image: url("../pictures/BGs/fourthbg.PNG");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

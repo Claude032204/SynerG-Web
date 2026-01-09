@@ -202,7 +202,7 @@
    INBOUND BG SETTINGS
    ========================================================= */
 .inbound-hero .service-hero-bg {
-  --bg-img: url("../pictures/bg pic.webp");
+  --bg-img: url("../pictures/BGs/bg pic.webp");
   --bg-overlay: rgba(15, 36, 25, 0.50);
   --bg-top-h: 50%;
 }
@@ -220,7 +220,7 @@
 
 /* Outbound background settings */
 .outbound-bg {
-  --bg-img: url("../pictures/bg pics3.jpg");
+  --bg-img: url("../pictures/BGs/bg pics3.jpg");
   --bg-overlay: rgba(0, 0, 0, 0.25);
   --bg-top-h: 50%;
 }
@@ -243,7 +243,7 @@
    NON-VOICE SUPPORT
    ========================================================= */
 .nonvoice-bg {
-  --bg-img: url("../pictures/bg pics 2.jpg");
+  --bg-img: url("../pictures/BGs/bg pics 2.jpg");
   --bg-overlay: rgba(15, 36, 25, 0.35);
   --bg-top-h: 50%;
 }
@@ -264,7 +264,7 @@
    IT SUPPORT
    ========================================================= */
 .itsupport-bg {
-  --bg-img: url("../pictures/bgpics4.jpg");
+  --bg-img: url("../pictures/BGs/bgpics4.jpg");
   --bg-overlay: rgba(15, 36, 25, 0.35);
   --bg-top-h: 50%;
 }

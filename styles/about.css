@@ -252,7 +252,7 @@
     width: 100%;
     min-height: 120vh;
     background: linear-gradient(rgba(0, 0, 0, 0.60)),
-      url("../pictures/vismis.jpg") center / cover no-repeat;
+      url("../pictures/BGs/vismis.jpg") center / cover no-repeat;
   }
   
   .about-inner {
