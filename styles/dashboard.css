@@ -242,58 +242,56 @@
 /* =========================================
    SCROLL REVEAL (ONLY ABOUT-STATS)
    ========================================= */
-   .about-stats .reveal-right{
-    opacity: 0;
-    transform: translateX(80px);
-    transition: transform 0.9s ease, opacity 0.9s ease;
-    will-change: transform, opacity;
+.about-stats .reveal-right{
+  opacity: 0;
+  transform: translateX(80px);
+  transition: transform 0.9s ease, opacity 0.9s ease;
+  will-change: transform, opacity;
+}
+
+.about-stats .reveal-right.is-visible{
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* optional stagger: container after title */
+.about-stats .about-stats__container.reveal-right{
+  transition-delay: 0.15s;
+}
+
+@media (max-width: 768px){
+  .about-stats .reveal-right{
+    transform: translateX(45px);
+    transition: transform 0.75s ease, opacity 0.75s ease;
   }
-  
-  .about-stats .reveal-right.is-visible{
-    opacity: 1;
-    transform: translateX(0);
-  }
-  
-  /* optional stagger: container after title */
-  .about-stats .about-stats__container.reveal-right{
-    transition-delay: 0.15s;
-  }
-  
-  @media (max-width: 768px){
-    .about-stats .reveal-right{
-      transform: translateX(45px);
-      transition: transform 0.75s ease, opacity 0.75s ease;
-    }
-  }
+}
 /* =========================================
    STATS CARDS REVEAL (slide up)
    ========================================= */
-   .about-stats .stat-card{
-    opacity: 0;
-    transform: translateY(40px);
-    transition: transform 0.75s ease, opacity 0.75s ease;
-    will-change: transform, opacity;
-  }
-  
-  .about-stats .stat-card.is-visible{
+.about-stats .stat-card{
+  opacity: 0;
+  transform: translateY(40px);
+  transition: transform 0.75s ease, opacity 0.75s ease;
+  will-change: transform, opacity;
+}
+
+.about-stats .stat-card.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger animation */
+.about-stats .stat-card:nth-child(1){ transition-delay: 0.00s; }
+.about-stats .stat-card:nth-child(2){ transition-delay: 0.12s; }
+.about-stats .stat-card:nth-child(3){ transition-delay: 0.24s; }
+
+@media (prefers-reduced-motion: reduce){
+  .about-stats .stat-card{
+    transition: none;
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
-  
-  /* stagger animation */
-  .about-stats .stat-card:nth-child(1){ transition-delay: 0.00s; }
-  .about-stats .stat-card:nth-child(2){ transition-delay: 0.12s; }
-  .about-stats .stat-card:nth-child(3){ transition-delay: 0.24s; }
-  
-  @media (prefers-reduced-motion: reduce){
-    .about-stats .stat-card{
-      transition: none;
-      opacity: 1;
-      transform: none;
-    }
-  }
-    
-  
+}
 
 /* =========================================================
    SECTION 3: OVAL + VENN
@@ -461,7 +459,9 @@
   width: 46px;
   height: auto;
   display: block;
-}/* =========================================
+}
+
+/* =========================================
    DASHBOARD OVAL REVEAL (LEFT + RIGHT)
    ========================================= */
 .dashboard-oval .oval-left-reveal,
@@ -496,8 +496,6 @@
     transform: none;
   }
 }
-
-
 
 /* =========================================================
    SECTION 4: BG IMAGE + CENTER CTA
@@ -575,24 +573,23 @@
   transform: translateY(-1px);
   opacity: 0.98;
 }
+
 /* =========================================
    CTA TYPING TEXT
    ========================================= */
-   .cta-typing{
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  
-  @media (max-width: 768px){
-    .cta-typing{
-      white-space: normal; /* allow wrap on mobile */
-    }
-  }
-  
+.cta-typing{
+  white-space: nowrap;
+  overflow: hidden;
+}
 
+@media (max-width: 768px){
+  .cta-typing{
+    white-space: normal; /* allow wrap on mobile */
+  }
+}
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE (your original)
    ========================================================= */
 @media (max-width: 900px) {
   .about-stats__grid {
@@ -756,5 +753,182 @@
   }
   .m-right{
     transform: translate(-50%, -50%) translateX(68%) scale(0.78);
+  }
+}
+
+/* =========================================================
+   ✅ MOBILE FIX PACK (Dashboard) - ADDED
+   ========================================================= */
+
+/* Prevent accidental horizontal scroll from 108vw / 112vw sections */
+html, body{
+  overflow-x: hidden;
+}
+
+/* 1) HERO / FIRST PAGE: tighter spacing */
+@media (max-width: 768px){
+  .first-page{
+    min-height: auto;
+  }
+
+  .first-page-content{
+    min-height: auto;
+    padding: 70px 18px 30px;
+  }
+
+  .hero-text{
+    max-width: 100%;
+  }
+
+  .hero-text p{
+    margin-bottom: 18px;
+  }
+
+  .l-realise-slider-card-block{
+    margin-top: 10px;
+  }
+}
+
+/* 2) SECTION 2: ABOUT STATS spacing + title bar */
+@media (max-width: 768px){
+  .about-stats{
+    padding: 120px 0 140px;
+    min-height: auto;
+    background-position: center;
+  }
+
+  .about-stats__container{
+    padding: 92px 18px 50px;
+  }
+
+  .about-stats p{
+    font-size: 16px;
+    margin: 0 auto 34px;
+    line-height: 1.7;
+  }
+
+  .about-stats__grid{
+    gap: 18px;
+  }
+
+  .stat-card{
+    max-width: 420px;
+    padding: 20px 16px;
+  }
+}
+
+/* 3) SECTION 3: DASHBOARD OVAL overlap control */
+@media (max-width: 768px){
+  .dashboard-oval{
+    margin-top: -40px;
+    margin-bottom: -80px;
+  }
+
+  .dashboard-oval__inner{
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+
+    min-height: auto;
+    padding: 34px 18px;
+    border-radius: 36px;
+  }
+
+  .dashboard-oval__content{
+    gap: 22px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .dashboard-oval__left{
+    flex: 1 1 auto;
+  }
+
+  .oval-desc{
+    margin-bottom: 10px;
+  }
+
+  .venn{
+    width: 260px;
+    height: 205px;
+  }
+
+  .venn-circle{
+    width: 120px;
+    height: 120px;
+    font-size: 12px;
+  }
+
+  .position-1{ left: 0; top: 6px; }
+  .position-2{ left: 140px; top: 6px; }
+  .position-3{ left: 68px; top: 88px; }
+}
+
+/* 4) SECTION 4: CTA background + center content */
+@media (max-width: 768px){
+  .cta-bg{
+    margin-top: -90px;
+    min-height: 70vh;
+  }
+
+  .cta-bg__content{
+    padding: 160px 18px 90px;
+    max-width: 560px;
+    gap: 16px;
+  }
+
+  .cta-bg__content h2{
+    line-height: 1.2;
+  }
+
+  .cta-bg__btn{
+    padding: 12px 26px;
+  }
+}
+
+/* 5) Extra small phones */
+@media (max-width: 480px){
+  .first-page-content{
+    padding: 62px 16px 26px;
+  }
+
+  .card-block-wrap{
+    max-width: 360px;
+    height: 220px;
+  }
+
+  .card{
+    width: 290px;
+    height: 160px;
+  }
+
+  .cta-bg__content{
+    padding: 140px 16px 80px;
+  }
+
+  .venn{
+    width: 240px;
+    height: 195px;
+  }
+
+  .venn-circle{
+    width: 112px;
+    height: 112px;
+    font-size: 11.5px;
+  }
+
+  .position-2{ left: 128px; }
+  .position-3{ left: 62px; top: 84px; }
+}
+
+/* 6) Safety: reduce motion if user prefers */
+@media (prefers-reduced-motion: reduce){
+  .about-stats .reveal-right,
+  .about-stats .stat-card,
+  .dashboard-oval .oval-left-reveal,
+  .dashboard-oval .oval-right-reveal{
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
   }
 }

@@ -200,6 +200,61 @@ main {
 .contact-form input:valid:not(:placeholder-shown) {
   outline: 2px solid #2ecc71;
 }
+/* ===========================
+   REVEAL FROM BOTTOM (MAP + FORM)
+   =========================== */
+   .reveal-up {
+    opacity: 0;
+    transform: translateY(55px); /* slightly more travel */
+    transition:
+      opacity 1200ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  
+  
+  .reveal-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* optional: make map + form reveal slightly staggered */
+  .reveal-delay-1 { transition-delay: 120ms; }
+  .reveal-delay-2 { transition-delay: 240ms; }
+  
+  /* ===========================
+     TYPING ANIMATION (HERO TITLE)
+     =========================== */
+  .contact-hero h1 {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;                 /* starts hidden */
+    animation: contactTyping 1.2s steps(22, end) forwards;
+    animation-delay: 150ms;
+  }
+  
+  @keyframes contactTyping {
+    from { width: 0; }
+    to   { width: 22ch; }     /* tweak if you change the text */
+  }
+  
+  /* ===========================
+     ACCESSIBILITY: REDUCE MOTION
+     =========================== */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-up {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  
+    .contact-hero h1 {
+      width: auto !important;
+      animation: none !important;
+    }
+  }
+  
 
 /* =========================================================
    FOOTER
